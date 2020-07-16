@@ -1,0 +1,16 @@
+import json
+#Load a file
+data = json.load(open('data.json'))
+def translate(w):
+    w = w.lower()
+    if w in data:
+        return data[w]
+    else:
+        return "This word doesn't exist. Please double check"
+
+word = input("Enter a word that you want to look up: ")
+
+print(translate(word))
+
+import difflib
+from difflib import SequenceMatcher
