@@ -1,0 +1,41 @@
+from difflib import get_close_matches
+import mysql.connector
+con = mysql.connector.connect(
+user = 'ardit700_student',
+password = 'ardit700_student',
+host = '108.167.140.122',
+database = 'ardit700_pm1database'
+)
+
+SQLquery_matching = 'SELECT * FROM Dictionary WHERE LOWER(Expression) LIKE "%s"' %w
+SQLquery_non_matching = 'SELECT Expression FROM DICTIONARY'
+
+  
+def translate(w):
+    w = w.lower()
+    cursor = con.cursor()
+    query = cursor.execute('SELECT * FROM Dictionary WHERE LOWER(Expression) = LOWER("%s")'%w)
+    results = cursor.fetchall()
+    if len(results)>0:
+    #if w in results[0]:
+        return results
+    else:
+        if len(results) ==0:
+            query = cursor.execute('SELECT Expression FROM Dictionary')
+            results = cursor.fetchall()
+            words = [result[0] for result in results]
+            meaning_place = get_close_matches(w,words,cutoff = 0.6)
+            if len(meaning_place) >0:
+                query_for_meaning = cursor.execute('SELECT * FROM Dictionary WHERE Expression LIKE "%s"'%meaning_place[0])
+                results = cursor.fetchall()
+                return results
+            else:
+                return "This word doesn't exist. Please double check"
+                
+word = input("Enter a word that you want to look up: ")
+output = translate(word)
+if type(output) == list:
+    for item in output:
+            print(item[1],'\n')
+else:
+    print(results[1])
