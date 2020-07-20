@@ -1,6 +1,6 @@
 #Simple map with markers
 import folium
-import pandas
+import pandas as pd
 
 data = pd.read_csv('Volcanoes.txt')
 lat = list(data.LAT)
@@ -40,7 +40,7 @@ map.save("Map_html_popup_simple.html")
 
 #html popup advanced
 import folium
-import pandas
+import pandas as pd
 
 data = pd.read_csv('Volcanoes.txt')
 lat = list(data.LAT)
@@ -77,7 +77,7 @@ map.save("Map_html_popup_advanced.html")
 # HTML advanced circle map
 
 import folium
-import pandas
+import pandas as pd
 
 data = pd.read_csv('Volcanoes.txt')
 lat = list(data.LAT)
@@ -115,7 +115,7 @@ map.save("Map_html_popup_advanced_circle.html")
 # Adding Geojson polygon layer data
 
 import folium
-import pandas
+import pandas as pd
 
 data = pd.read_csv('Volcanoes.txt')
 lat = list(data.LAT)
